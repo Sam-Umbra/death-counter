@@ -1,5 +1,7 @@
+import { ipcRenderer } from "electron";
 const electron = require('electron');
 
 electron.contextBridge.exposeInMainWorld("electron", {
-    hello: () => console.log('hello'),
+    getUsers: () => ipcRenderer.invoke('db:getUsers'),
+    addUser: (name:string) => ipcRenderer.invoke('db:addUser', name),
 });
